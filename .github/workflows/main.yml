@@ -30,7 +30,7 @@ jobs:
     # Build SAM Application
     - name: Build SAM Application
       run: |
-        cd eksamen_2023-main/kjell/hello_world
+        cd eksamen_2023-main/kjell
         pip install aws-sam-cli
         sam build
 
@@ -38,7 +38,7 @@ jobs:
     - name: Deploy SAM Application
       if: github.ref == 'refs/heads/main'
       run: |
-        cd eksamen_2023-main/kjell/hello_world
+        cd eksamen_2023-main/kjell
         sam deploy --no-confirm-changeset --stack-name MinSamApplikasjonStack --template-file template.yaml
 
 
