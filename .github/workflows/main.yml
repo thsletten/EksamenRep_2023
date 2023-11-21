@@ -1,4 +1,4 @@
-name: Build og Deploy til AWS
+name: SAM Build and Deploy
 
 on:
   push:
@@ -7,27 +7,26 @@ on:
       - '*'
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout Repository
       uses: actions/checkout@v2
 
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8
+        python-version: '3.x'
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
         pip install aws-sam-cli
 
     - name: Build SAM Application
-      run: sam build --use-container
+      run: sam build
 
     - name: Deploy SAM Application
       if: github.ref == 'refs/heads/main'
       run: |
-        sam deploy --guided
+        sam deploy --no-confirm-changeset
