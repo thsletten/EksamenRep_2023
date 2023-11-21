@@ -30,7 +30,7 @@ jobs:
     # Build and Deploy SAM Application
     - name: Build SAM Application
       run: |
-        cd eksamen_2023-main/kjell/hello_world
+        cd eksamen_2023-main/kjell/hello_world/template.yaml
         pip install aws-sam-cli
         sam build
 
