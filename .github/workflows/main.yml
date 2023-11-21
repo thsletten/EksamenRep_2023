@@ -27,23 +27,25 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY }}
         aws-region: eu-west-1 
 
-    # Build and Deploy SAM Application
+    # Build SAM Application
     - name: Build SAM Application
       run: |
-        cd eksamen_2023-main/kjell
+        cd eksamen_2023-main/kjell/hello_world
         pip install aws-sam-cli
         sam build
 
+    # Deploy SAM Application
     - name: Deploy SAM Application
       if: github.ref == 'refs/heads/main'
       run: |
-        sam deploy --no-confirm-changeset --stack-name MinSamApplikasjonStack
+        cd eksamen_2023-main/kjell/hello_world
+        sam deploy --no-confirm-changeset --stack-name MinSamApplikasjonStack --template-file template.yaml
 
 
     # Build Docker Image
     - name: Build Docker Image
       run: |
-        cd eksamen_2023-main/kjell
+        cd eksamen_2023-main/kjell/hello_world
         docker build -t kjellpy .
 
     # run the Docker container
@@ -54,3 +56,4 @@ jobs:
           -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }} \
           -e BUCKET_NAME=kjellsimgebucket2032 \
           kjellpy
+
