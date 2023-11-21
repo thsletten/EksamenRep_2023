@@ -29,7 +29,7 @@ jobs:
       
     - name: Build and Deploy SAM Application
       run: |
-        cd kjell
+        cd eksamen_2023-main/kjell
         pip install aws-sam-cli
         sam build
         if [ "$GITHUB_REF" == "refs/heads/main" ]; then
