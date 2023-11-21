@@ -31,14 +31,11 @@ jobs:
       run: cd kjell
 
         
-    - name: Install dependencies
+    - name: Build and Deploy SAM Application
       run: |
+        cd kjell
         pip install aws-sam-cli
-
-    - name: Build SAM Application
-      run: sam build
-
-    - name: Deploy SAM Application
-      if: github.ref == 'refs/heads/main'
-      run: |
-        sam deploy --no-confirm-changeset
+        sam build
+        if [ "$GITHUB_REF" == "refs/heads/main" ]; then
+            sam deploy --no-confirm-changeset
+        fi
