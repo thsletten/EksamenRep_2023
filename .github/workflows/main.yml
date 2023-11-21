@@ -39,7 +39,7 @@ jobs:
       if: github.ref == 'refs/heads/main'
       run: |
         cd eksamen_2023-main/kjell
-        sam deploy --no-confirm-changeset --stack-name MinSamApplikasjonStack --template-file template.yaml
+        sam deploy --no-confirm-changeset --stack-name MinSamApplikasjonStack --template-file template.yaml --resolve
 
     # Build Docker Image
     - name: Build Docker Image
